@@ -47,7 +47,7 @@ run.bat --base http://127.0.0.1:8000   # прогон против локаль�
 ## 4. Отчёт Allure
 
 ```bash
-run.bat
+report.bat                           # прогон + allure generate + allure open
 allure serve allure-results          # нужен allure CLI (Java)
 npx allure serve allure-results      # альтернатива через node
 allure generate allure-results -o allure-report --clean
@@ -176,3 +176,5 @@ tests/                 тесты
   проходят в обоих вариантах сайта: если заблокированных дней или нативной валидации нет,
   проверяется, что поле осталось пустым.
 * Перед прогоном отключите блокировщики рекламы (браузер запускается с чистым профилем).
+* В `.github/workflows/tests.yml` лежит прогон в GitHub Actions: артефакты `allure-results`
+  и `shots` выгружаются всегда, HTML-отчёт — при падении.
