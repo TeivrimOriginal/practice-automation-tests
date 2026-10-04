@@ -18,7 +18,9 @@ jobs:
         with:
           chrome-version: stable
       - run: pip install -r requirements.txt
-      - run: py -3 -m pytest -q --alluredir=allure-results
+      # `py -3` is the Windows Python launcher and does not exist here; on a
+      # Linux runner the interpreter set up above is just `python`.
+      - run: python -m pytest -q --alluredir=allure-results
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -29,8 +31,3 @@ jobs:
         with:
           name: screenshots
           path: shots
-      - uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: allure-report
-          path: allure-report
